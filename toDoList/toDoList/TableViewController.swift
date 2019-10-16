@@ -2,33 +2,18 @@
 //  TableViewController.swift
 //  toDoList
 //
-//  Created by Мария on 15.10.2019.
+//  Created by Мария on 16.10.2019.
 //  Copyright © 2019 Мария. All rights reserved.
 //
-
-//Связующий элемент между Моделью и viewControllerом
 
 import UIKit
 
 class TableViewController: UITableViewController {
 
     
-    @IBAction func pushAddAction(_ sender: Any) {
-        let alertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
-        alertController.addTextField { (textField) in
-            textField.placeholder = "New Item" //значение по умолчанию
-        }
-        let alertAction1 = UIAlertAction(title: "Cancel", style: .default) { (alert) in
-            
-        }
-        let alertAction2 = UIAlertAction(title: "Create", style: .default) { (alert) in
-            let newItem = alertController.textFields![0] .text
-            addItem(nameItem: newItem!)
-            self.tableView.reloadData()
-        }
-        alertController.addAction(alertAction1)
-        alertController.addAction(alertAction2)
-        present(alertController, animated: true, completion: nil)
+    @IBAction func addNewItem(_ sender: Any) {
+        addItem("New Item")
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -55,39 +40,19 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return toDoItems.count
+        return toDoItem.count
     }
 
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-        // Configure the cell...
-        //Выводим данные из словаря
-        let dictItem = toDoItems[indexPath.row]
-        if let strItem = dictItem["Name:"] as? String {
-            cell.textLabel?.text = strItem
-        }
         
-        //добавление галочки завершенности действия
-        if (dictItem["Is compleated"] as? Bool) == true {
-            cell.accessoryType = .checkmark
-        } else {
-             cell.accessoryType = .none
-        }
+        cell.textLabel?.text = toDoItem[indexPath.row]
+        // Configure the cell...
+
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if changeStatus(at: indexPath.row) {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        }
-        
-        tableView.reloadData()
-    }
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -96,6 +61,7 @@ class TableViewController: UITableViewController {
     }
     
 
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -106,7 +72,7 @@ class TableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-
+    
 
     /*
     // Override to support rearranging the table view.
