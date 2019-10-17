@@ -17,7 +17,7 @@ class TableViewController: UITableViewController {
         alertController.addTextField { (textField) in
             textField.placeholder = "New Item"
         }
-        let alertAction1 = UIAlertAction(title: "Create", style: .cancel) { (action) in
+        let alertAction1 = UIAlertAction(title: "Create", style: .cancelt) { (action) in
             let name = alertController.textFields![0].text
             addItem(name!)
             self.tableView.reloadData()
