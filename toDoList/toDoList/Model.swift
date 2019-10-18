@@ -35,3 +35,9 @@ func changeStatus(at index: Int) -> Bool {
     toDoItem[index]["Is done"] = !(toDoItem[index]["Is done"] as! Bool)
     return toDoItem[index]["Is done"] as! Bool
 }
+
+func moveItem(from: Int, to: Int) {
+    let item = toDoItem[from]
+    toDoItem.remove(at: from)
+    toDoItem.insert(item, at: to)
+}

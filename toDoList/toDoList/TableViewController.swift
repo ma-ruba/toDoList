@@ -11,13 +11,18 @@ import UIKit
 class TableViewController: UITableViewController {
 
     
+    @IBAction func editItem(_ sender: Any) {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+    }
+    
+    
     @IBAction func addNewItem(_ sender: Any) {
        //элемент, при помощи которого выводятся стандартные всплывающие окна
         let alertController = UIAlertController(title: "Add Item", message: "", preferredStyle: .alert)
         alertController.addTextField { (textField) in
             textField.placeholder = "New Item"
         }
-        let alertAction1 = UIAlertAction(title: "Create", style: .cancelt) { (action) in
+        let alertAction1 = UIAlertAction(title: "Create", style: .cancel) { (action) in
             let name = alertController.textFields![0].text
             addItem(name!)
             self.tableView.reloadData()
@@ -65,9 +70,9 @@ class TableViewController: UITableViewController {
         cell.textLabel?.text = dict["Name"] as? String
         // Configure the cell...
         if dict["Is done"] as! Bool == true {
-            cell.accessoryType = .checkmark
+            cell.imageView?.image = #imageLiteral(resourceName: "check")
         } else {
-            cell.accessoryType = .none
+            cell.imageView?.image = #imageLiteral(resourceName: "uncheck")
         }
 
         return cell
@@ -96,18 +101,22 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //снимаем выделение с ячейки
         if changeStatus(at: indexPath.row) == true {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            tableView.cellForRow(at: indexPath)?.imageView?.image = #imageLiteral(resourceName: "check")
         } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+            tableView.cellForRow(at: indexPath)?.imageView?.image = #imageLiteral(resourceName: "uncheck")
         }
     }
 
-    /*
+    
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        moveItem(from: fromIndexPath.row, to: to.row)
+//        let from = toDoItem[fromIndexPath.row]
+//        toDoItem.remove(at: fromIndexPath.row)
+//        toDoItem.insert(from, at: to.row)
+        tableView.reloadData()
     }
-    */
+    
 
     /*
     // Override to support conditional rearranging of the table view.

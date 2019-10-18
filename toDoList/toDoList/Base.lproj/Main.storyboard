@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,20 +19,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="Cell" textLabel="lf3-Up-6QI" style="IBUITableViewCellStyleDefault" id="MI5-E0-yyK">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="lf3-Up-6QI" imageView="6lV-4s-F8K" style="IBUITableViewCellStyleDefault" id="MI5-E0-yyK">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MI5-E0-yyK" id="KBp-CY-u9K">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lf3-Up-6QI">
-                                            <rect key="frame" x="16" y="0.0" width="319" height="43.5"/>
+                                            <rect key="frame" x="75" y="0.0" width="284" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="uncheck" id="6lV-4s-F8K">
+                                            <rect key="frame" x="16" y="0.0" width="44" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -42,11 +47,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="toDoList" id="F6R-mC-xir">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="w8f-Y0-bIt">
-                            <connections>
-                                <action selector="addNewItem:" destination="492-sX-bOa" id="0no-p8-gev"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="w8f-Y0-bIt">
+                                <connections>
+                                    <action selector="addNewItem:" destination="492-sX-bOa" id="0no-p8-gev"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="AuC-9h-QLd">
+                                <connections>
+                                    <action selector="editItem:" destination="492-sX-bOa" id="CI6-an-eUr"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YeM-PO-gJI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -72,4 +84,7 @@
             <point key="canvasLocation" x="109.59999999999999" y="168.6656671664168"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="uncheck" width="512" height="512"/>
+    </resources>
 </document>
